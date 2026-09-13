@@ -1,0 +1,21 @@
+{
+  "name": "requestproof",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Chrome MV3 extension: local proof that you submitted a web form (metadata + screenshots, no server).",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "node --test \"tests/*.test.js\"",
+    "icons": "node scripts/generate-icons.js",
+    "validate:manifest": "node scripts/validate-manifest.js",
+    "check": "npm run lint && npm run validate:manifest && npm test",
+    "e2e": "node tests/e2e/run.js",
+    "demo": "python3 -m http.server 8080 --directory demo"
+  },
+  "devDependencies": {
+    "eslint": "^9.14.0",
+    "globals": "^15.12.0",
+    "playwright": "^1.49.0"
+  }
+}

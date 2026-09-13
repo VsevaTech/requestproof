@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  icons:
+    # Icons are generated deterministically (scripts/generate-icons.js) so the
+    # repo never depends on hand-made binaries; if they are missing or stale on
+    # main, this job commits them.
+    name: Ensure icons
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/generate-icons.js
+      - name: Commit generated icons (main only)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          if [ -n "$(git status --porcelain extension/icons)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add extension/icons
+            git commit -m "chore: generate extension icons"
+            git push
+          fi
+
+  static:
+    name: Lint, manifest validation, unit tests
+    runs-on: ubuntu-latest
+    needs: icons
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: node scripts/generate-icons.js
+      - run: npm run lint
+      - run: npm run validate:manifest
+      - run: npm test
+
+  e2e:
+    name: Extension in Chromium (Playwright)
+    runs-on: ubuntu-latest
+    needs: static
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: node scripts/generate-icons.js
+      - run: npx playwright install --with-deps chromium
+      - run: npm run e2e
+      - name: Upload proof package and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-artifacts
+          path: tests/e2e/.artifacts
+          if-no-files-found: ignore
