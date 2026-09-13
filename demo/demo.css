@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  padding: 32px 16px;
+  font: 15px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #f0f2f7;
+  color: #1b1b1f;
+}
+.card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 32px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+h1 { font-size: 22px; margin: 0 0 6px; }
+.sub { color: #666; font-size: 13px; }
+fieldset { border: 1px solid #e0e3ea; border-radius: 8px; padding: 12px 16px 16px; margin: 18px 0; }
+legend { font-weight: 600; padding: 0 6px; }
+label, .label { display: block; margin: 12px 0 4px; font-weight: 500; }
+label.inline { display: flex; align-items: center; gap: 8px; font-weight: 400; margin: 8px 0; }
+small { color: #888; font-weight: 400; }
+input[type="text"], input[type="email"], input[type="tel"], input[type="password"], select, textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 1px solid #c9cdd6;
+  border-radius: 6px;
+  font: inherit;
+}
+button {
+  margin-top: 8px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 8px;
+  background: #2b5cff;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.success { text-align: center; }
+.check {
+  width: 64px; height: 64px; margin: 0 auto 12px;
+  border-radius: 50%; background: #e8f5e9; color: #1b7f3b;
+  font-size: 36px; line-height: 64px; font-weight: 700;
+}

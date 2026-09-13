@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo — Complaint form (RequestProof)</title>
+<link rel="stylesheet" href="demo.css">
+</head>
+<body>
+<main class="card">
+  <h1>Consumer complaint form</h1>
+  <p class="sub">Demo page for the RequestProof extension. Nothing is sent anywhere — submitting just opens <code>success.html</code>.</p>
+
+  <form id="complaint-form" action="success.html" method="post" autocomplete="off">
+    <!-- technical hidden fields: must never appear in a proof -->
+    <input type="hidden" name="csrf_token" value="9f1c2e7a-demo-token">
+    <input type="hidden" name="form_version" value="3">
+
+    <fieldset>
+      <legend>Applicant</legend>
+      <label for="fullName">Full name</label>
+      <input id="fullName" name="full_name" type="text" required>
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required>
+
+      <label for="phone">Phone</label>
+      <input id="phone" name="phone" type="tel">
+
+      <label for="passport">Passport number <small>(sensitive — excluded from proof)</small></label>
+      <input id="passport" name="passport_number" type="text">
+    </fieldset>
+
+    <fieldset>
+      <legend>Request</legend>
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <option value="">— select —</option>
+        <option value="refund">Refund</option>
+        <option value="service">Service quality</option>
+        <option value="billing">Billing error</option>
+      </select>
+
+      <label for="orderId">Order / contract ID</label>
+      <input id="orderId" name="order_id" type="text">
+
+      <label for="message">Description</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <span class="label">Preferred contact</span>
+      <label class="inline"><input type="radio" name="contact_pref" value="email" checked> Email</label>
+      <label class="inline"><input type="radio" name="contact_pref" value="phone"> Phone</label>
+
+      <label class="inline"><input type="checkbox" name="agree" required> I confirm the information above is accurate</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Account (sensitive — excluded from proof)</legend>
+      <label for="password">Account password</label>
+      <input id="password" name="password" type="password">
+
+      <label for="cardNumber">Card number</label>
+      <input id="cardNumber" name="card_number" type="text" autocomplete="cc-number" inputmode="numeric">
+
+      <label for="cvv">CVV</label>
+      <input id="cvv" name="cvv" type="text" autocomplete="cc-csc" inputmode="numeric">
+
+      <label for="note">Internal note <small>(marked <code>data-sensitive</code>)</small></label>
+      <input id="note" name="internal_note" type="text" data-sensitive>
+    </fieldset>
+
+    <button type="submit" id="submit">Submit complaint</button>
+  </form>
+</main>
+<script src="form.js"></script>
+</body>
+</html>
