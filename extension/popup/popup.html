@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RequestProof</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<header>
+  <img src="../icons/icon48.png" alt="" width="24" height="24">
+  <h1>RequestProof</h1>
+  <span id="status-badge" class="badge idle">idle</span>
+</header>
+
+<main>
+  <section id="view-idle" class="view">
+    <p>Open the web form, fill it in, then click <strong>Record Submission</strong> right before you press the site's submit button.</p>
+    <button id="btn-record" class="primary">Record Submission</button>
+    <p class="hint">Records page URL, time, title and the <em>names</em> of filled fields plus a screenshot. Field values, passwords and card data are never stored.</p>
+  </section>
+
+  <section id="view-recording" class="view" hidden>
+    <dl class="meta">
+      <dt>Page</dt><dd id="rec-title"></dd>
+      <dt>URL</dt><dd id="rec-url" class="url"></dd>
+      <dt>Recorded</dt><dd id="rec-time"></dd>
+      <dt>Fields</dt><dd id="rec-fields"></dd>
+    </dl>
+    <p id="rec-hint" class="hint">Now submit the form. The confirmation page is captured automatically when the site navigates. If it does not, open this popup on the confirmation page and click <strong>Capture confirmation</strong>.</p>
+    <p id="rec-auto-error" class="warn" hidden></p>
+    <button id="btn-capture" class="primary">Capture confirmation</button>
+    <button id="btn-download-partial" class="secondary">Download partial package (no confirmation)</button>
+    <button id="btn-discard" class="link">Discard recording</button>
+  </section>
+
+  <section id="view-complete" class="view" hidden>
+    <p class="ok">Confirmation captured.</p>
+    <dl class="meta">
+      <dt>Form</dt><dd id="done-before-url" class="url"></dd>
+      <dt>Confirmation</dt><dd id="done-after-url" class="url"></dd>
+      <dt>Captured</dt><dd id="done-after-time"></dd>
+    </dl>
+    <button id="btn-download" class="primary">Download proof package</button>
+    <button id="btn-recapture" class="secondary">Re-capture confirmation</button>
+    <button id="btn-discard-2" class="link">Discard recording</button>
+  </section>
+
+  <p id="error" class="error" hidden></p>
+</main>
+
+<footer>
+  <span>Everything stays on this device.</span>
+</footer>
+
+<script src="../lib/fields.js"></script>
+<script src="../lib/zip.js"></script>
+<script src="../lib/summary.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

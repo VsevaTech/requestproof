@@ -1,0 +1,94 @@
+:root {
+  color-scheme: light dark;
+  --fg: #1b1b1f;
+  --muted: #6b6b73;
+  --bg: #ffffff;
+  --card: #f5f5f7;
+  --primary: #2b5cff;
+  --primary-fg: #fff;
+  --border: #dcdce2;
+  --ok: #1b7f3b;
+  --warn: #b35c00;
+  --err: #b3261e;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #ececf1;
+    --muted: #a0a0aa;
+    --bg: #1c1c21;
+    --card: #26262d;
+    --primary: #5d84ff;
+    --border: #3a3a44;
+    --ok: #63c27a;
+    --warn: #f0a04b;
+    --err: #ff6b62;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  width: 340px;
+  margin: 0;
+  font: 13px/1.45 -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+}
+header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px 8px;
+  border-bottom: 1px solid var(--border);
+}
+h1 { font-size: 15px; margin: 0; flex: 1; }
+main { padding: 12px 14px; }
+footer {
+  padding: 8px 14px 10px;
+  color: var(--muted);
+  font-size: 11px;
+  border-top: 1px solid var(--border);
+}
+p { margin: 0 0 10px; }
+.hint { color: var(--muted); font-size: 12px; }
+.warn { color: var(--warn); font-size: 12px; }
+.ok { color: var(--ok); font-weight: 600; }
+.error { color: var(--err); font-size: 12px; margin-top: 8px; }
+button {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--fg);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+button.primary { background: var(--primary); color: var(--primary-fg); border-color: transparent; }
+button.link { background: none; border: none; color: var(--muted); font-weight: 400; padding: 4px; }
+button:disabled { opacity: 0.55; cursor: default; }
+.badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.badge.recording { background: #fff3e0; color: #b35c00; }
+.badge.complete { background: #e8f5e9; color: #1b7f3b; }
+dl.meta {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 3px 8px;
+  margin: 0 0 10px;
+  padding: 8px 10px;
+  background: var(--card);
+  border-radius: 8px;
+  font-size: 12px;
+}
+dl.meta dt { color: var(--muted); }
+dl.meta dd { margin: 0; overflow-wrap: anywhere; }
+.url { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; }
